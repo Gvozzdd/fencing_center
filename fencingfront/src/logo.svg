@@ -1,0 +1,7 @@
+<!-- src/logo.svg -->
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <path d="M40 0 L77.982 60 H2.018 L40 0 Z" fill="#4CAF50" />
+  <path d="M40 80 L77.982 20 H2.018 L40 80 Z" fill="#333" />
+  <circle cx="40" cy="40" r="30" fill="white" />
+  <path d="M40 20 L60 60 L20 60 Z" fill="#4CAF50" />
+</svg>
