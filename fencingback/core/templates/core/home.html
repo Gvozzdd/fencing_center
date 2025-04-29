@@ -1,0 +1,153 @@
+<!-- core/templates/core/home.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Центр Фехтования</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+</head>
+<body>
+    <header>
+        <h1>Центр Фехтования</h1>
+        <nav>
+            <a href="/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-home mr-2"></i> Главная
+            </a>
+            <a href="/about/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-info-circle mr-2"></i> О нас
+            </a>
+            <a href="/services/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-dumbbell mr-2"></i> Услуги
+            </a>
+            <a href="/news/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-newspaper mr-2"></i> Новости
+            </a>
+            <a href="/gallery/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-images mr-2"></i> Галерея
+            </a>
+            <a href="/reviews/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-comments mr-2"></i> Отзывы
+            </a>
+            <a href="/enrollment/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-calendar-alt mr-2"></i> Запись
+            </a>
+        </nav>
+    </header>
+    <main>
+        <section id="hero" className="relative h-screen">
+            <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted>
+                <source src="{% static 'videos/fencing.mp4' %}" type="video/mp4" />
+                Ваш браузер не поддерживает тег video.
+            </video>
+            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="absolute inset-0 flex items-center justify-center text-white">
+                <div className="text-center">
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Добро пожаловать в Центр Фехтования</h1>
+                    <p className="text-lg md:text-xl mb-6">Мы предлагаем качественные занятия по фехтированию для всех возрастов и уровней подготовки.</p>
+                    <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">Подробнее</button>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div className="about-content">
+                <img src="{% static 'images/center.jpg' %}" alt="Центр Фехтования" className="w-full md:w-1/2 rounded-lg shadow-lg mb-8 md:mb-0" />
+                <div className="md:w-1/2 pl-0 md:pl-12">
+                    <h2 className="text-3xl font-bold mb-4">О нас</h2>
+                    <p className="text-lg text-gray-700">
+                        Наш центр — это место, где каждый может открыть для себя фехтование. Мы стремимся развивать этот вид спорта, передавая знания и опыт новым поколениям. Наша миссия — воспитывать сильных и дисциплинированных спортсменов.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="services">
+            <h2 className="text-3xl font-bold text-center mb-8">Спортивная подготовка по фехтованию</h2>
+            <div className="service-grid">
+                <div className="service-card">
+                    <h3>Фехтование на шпагах</h3>
+                    <p>Занятия для начинающих и продвинутых спортсменов.</p>
+                </div>
+                <div className="service-card">
+                    <h3>Фехтование на рапирах</h3>
+                    <p>Традиционный стиль фехтования с использованием рапиры.</p>
+                </div>
+                <div className="service-card">
+                    <h3>Фехтование на саблях</h3>
+                    <p>Энергичные тренировки с использованием сабель.</p>
+                </div>
+                <div className="service-card">
+                    <h3>Фехтование на колясках</h3>
+                    <p>Программа для людей с ограниченными возможностями.</p>
+                </div>
+            </div>
+        </section>
+        <section id="news">
+            <h2 className="text-3xl font-bold text-center mb-8">Новости</h2>
+            <div className="news-grid" id="news-grid">
+                <!-- Новости будут загружены через JavaScript -->
+            </div>
+        </section>
+        <section id="gallery">
+            <h2 className="text-3xl font-bold text-center mb-8">Галерея</h2>
+            <div className="gallery-grid">
+                <img src="{% static 'images/gallery1.jpg' %}" alt="Галерея 1" className="rounded-lg shadow-lg" />
+                <img src="{% static 'images/gallery2.jpg' %}" alt="Галерея 2" className="rounded-lg shadow-lg" />
+                <img src="{% static 'images/gallery3.jpg' %}" alt="Галерея 3" className="rounded-lg shadow-lg" />
+                <!-- Добавьте остальные изображения -->
+            </div>
+        </section>
+        <section id="reviews">
+            <h2 className="text-3xl font-bold text-center mb-8">Отзывы</h2>
+            <div className="review-grid" id="review-grid">
+                <!-- Отзывы будут загружены через JavaScript -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Центр Фехтования</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            axios.get('https://yourdomain.com/api/news/')
+                .then(function(response) {
+                    const newsGrid = document.getElementById('news-grid');
+                    response.data.forEach(newsItem => {
+                        const newsCard = document.createElement('div');
+                        newsCard.className = 'news-card';
+                        newsCard.innerHTML = `
+                            <h3>${newsItem.title}</h3>
+                            <p>${newsItem.content}</p>
+                        `;
+                        newsGrid.appendChild(newsCard);
+                    });
+                })
+                .catch(function(error) {
+                    console.error('Error fetching news:', error);
+                });
+
+            axios.get('https://yourdomain.com/api/reviews/')
+                .then(function(response) {
+                    const reviewGrid = document.getElementById('review-grid');
+                    response.data.forEach(reviewItem => {
+                        const reviewCard = document.createElement('div');
+                        reviewCard.className = 'review-card';
+                        reviewCard.innerHTML = `
+                            <h3>${reviewItem.author}</h3>
+                            <p>${reviewItem.text}</p>
+                        `;
+                        reviewGrid.appendChild(reviewCard);
+                    });
+                })
+                .catch(function(error) {
+                    console.error('Error fetching reviews:', error);
+                });
+        });
+    </script>
+</body>
+</html>
