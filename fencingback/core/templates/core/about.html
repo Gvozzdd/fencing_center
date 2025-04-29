@@ -1,0 +1,71 @@
+<!-- core/templates/core/about.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас | Центр Фехтования</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+</head>
+<body>
+    <header>
+        <h1>Центр Фехтования</h1>
+        <nav>
+            <a href="/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-home mr-2"></i> Главная
+            </a>
+            <a href="/about/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-info-circle mr-2"></i> О нас
+            </a>
+            <a href="/services/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-dumbbell mr-2"></i> Услуги
+            </a>
+            <a href="/news/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-newspaper mr-2"></i> Новости
+            </a>
+            <a href="/gallery/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-images mr-2"></i> Галерея
+            </a>
+            <a href="/reviews/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-comments mr-2"></i> Отзывы
+            </a>
+            <a href="/enrollment/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-calendar-alt mr-2"></i> Запись
+            </a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>О нашем центре</h2>
+            <p>Мы занимаемся фехтированием уже более 10 лет и предлагаем высококачественные занятия для детей и взрослых. Наш опыт позволяет нам предлагать программы для всех уровней подготовки и возрастов.</p>
+            <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 mt-4" onclick="openModal()">Подробнее</button>
+        </section>
+    </main>
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" id="modal">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-4">Подробная информация о нас</h2>
+            <p class="text-lg text-gray-700 mb-6">
+                Мы занимаемся фехтированием уже более 10 лет и предлагаем высококачественные занятия для детей и взрослых. Наш опыт позволяет нам предлагать программы для всех уровней подготовки и возрастов.
+            </p>
+            <button class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Центр Фехтования</p>
+    </footer>
+    <script>
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
