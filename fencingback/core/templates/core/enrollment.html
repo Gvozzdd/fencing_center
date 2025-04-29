@@ -1,0 +1,153 @@
+<!-- core/templates/core/enrollment.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на секцию | Центр Фехтования</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+</head>
+<body>
+    <header>
+        <h1>Центр Фехтования</h1>
+        <nav>
+            <a href="/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-home mr-2"></i> Главная
+            </a>
+            <a href="/about/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-info-circle mr-2"></i> О нас
+            </a>
+            <a href="/services/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-dumbbell mr-2"></i> Услуги
+            </a>
+            <a href="/news/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-newspaper mr-2"></i> Новости
+            </a>
+            <a href="/gallery/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-images mr-2"></i> Галерея
+            </a>
+            <a href="/reviews/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-comments mr-2"></i> Отзывы
+            </a>
+            <a href="/enrollment/" className="mx-2 text-lg hover:text-gray-300 flex items-center">
+                <i className="fas fa-calendar-alt mr-2"></i> Запись
+            </a>
+        </nav>
+    </header>
+    <main>
+        <section id="enrollment">
+            <h2 className="text-3xl font-bold text-center mb-8">Запись на секцию по фехтованию</h2>
+            <form id="enrollment-form">
+                <label htmlFor="name">Имя:</label>
+                <input type="text" id="name" name="name" required />
+                <span id="name-error" className="text-red-500 text-sm mt-1 hidden"></span>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+                <span id="email-error" className="text-red-500 text-sm mt-1 hidden"></span>
+                <label htmlFor="phone">Телефон:</label>
+                <input type="tel" id="phone" name="phone" required />
+                <span id="phone-error" className="text-red-500 text-sm mt-1 hidden"></span>
+                <label htmlFor="age">Возраст:</label>
+                <input type="number" id="age" name="age" required />
+                <span id="age-error" className="text-red-500 text-sm mt-1 hidden"></span>
+                <label htmlFor="style">Стиль фехтования:</label>
+                <select id="style" name="style" required>
+                    <option value="шпаги">Фехтование на шпагах</option>
+                    <option value="рапиры">Фехтование на рапирах</option>
+                    <option value="сабли">Фехтование на саблях</option>
+                    <option value="коляски">Фехтование на колясках</option>
+                </select>
+                <button type="submit">Записаться</button>
+            </form>
+            <div id="response-message"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Центр Фехтования</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('enrollment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                age: formData.get('age'),
+                style: formData.get('style')
+            };
+
+            const validationErrors = validate(data);
+            if (Object.keys(validationErrors).length === 0) {
+                axios.post('https://yourdomain.com/enrollment/', data)
+                    .then(function(response) {
+                        document.getElementById('response-message').innerText = 'Вы успешно записались на секцию!';
+                        document.getElementById('enrollment-form').reset();
+                        hideErrors();
+                    })
+                    .catch(function(error) {
+                        document.getElementById('response-message').innerText = 'Ошибка при записи на секцию.';
+                    });
+            } else {
+                showErrors(validationErrors);
+            }
+        });
+
+        function validate(data) {
+            let errors = {};
+            if (!data.name) {
+                errors.name = 'Имя обязательно';
+            }
+            if (!data.email) {
+                errors.email = 'Email обязателен';
+            } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+                errors.email = 'Email некорректен';
+            }
+            if (!data.phone) {
+                errors.phone = 'Телефон обязателен';
+            } else if (!/^\d{10,15}$/.test(data.phone)) {
+                errors.phone = 'Телефон некорректен';
+            }
+            if (!data.age) {
+                errors.age = 'Возраст обязателен';
+            } else if (isNaN(data.age) || parseInt(data.age) <= 0) {
+                errors.age = 'Возраст должен быть числом больше 0';
+            }
+            return errors;
+        }
+
+        function showErrors(errors) {
+            hideErrors();
+            if (errors.name) {
+                document.getElementById('name-error').innerText = errors.name;
+                document.getElementById('name-error').classList.remove('hidden');
+            }
+            if (errors.email) {
+                document.getElementById('email-error').innerText = errors.email;
+                document.getElementById('email-error').classList.remove('hidden');
+            }
+            if (errors.phone) {
+                document.getElementById('phone-error').innerText = errors.phone;
+                document.getElementById('phone-error').classList.remove('hidden');
+            }
+            if (errors.age) {
+                document.getElementById('age-error').innerText = errors.age;
+                document.getElementById('age-error').classList.remove('hidden');
+            }
+        }
+
+        function hideErrors() {
+            document.getElementById('name-error').classList.add('hidden');
+            document.getElementById('email-error').classList.add('hidden');
+            document.getElementById('phone-error').classList.add('hidden');
+            document.getElementById('age-error').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
